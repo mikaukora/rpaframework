@@ -39,9 +39,9 @@ class LibraryFinder:
                     if self.is_module_library(path):
                         paths.add(path)
                         paths |= {
-                            file
-                            for file in path.glob("**/*")
-                            if self.is_resource_file(path)
+                            res
+                            for res in path.glob("**/*")
+                            if self.is_resource_file(res)
                         }
                     else:
                         for child in path.iterdir():
