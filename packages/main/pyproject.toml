@@ -34,8 +34,8 @@ packages = [
 [tool.poetry.dependencies]
 python = "^3.6"
 dataclasses = { version = "^0.7", python=">=3.6,<3.7" }
-rpaframework-core = "^3.0.0"
-rpaframework-recognition = { version = "^0.4.0", optional = true }
+rpaframework-core = { path = "../core/", develop = true }
+rpaframework-recognition = { path = "../recognition/" }
 jsonpath-ng = "^1.5.2"
 robotframework = "^3.2.2"
 robotframework-sapguilibrary = { version = "^1.1", platform = "win32" }
