@@ -56,8 +56,13 @@ class MouseKeywords(LibraryContext):
         except ImportError as exc:
             self._error = exc
 
-    def _move(self, point: Point) -> None:
-        """Move mouse to given point."""
+    def _move(self, location: Union[Point, Region]) -> None:
+        """Move mouse to given location."""
+        if isinstance(location, Region):
+            point = location.center
+        else:
+            point = location
+
         # TODO: Clamp to screen dimensions?
         self.logger.info("Moving mouse to (%d, %d)", *point)
         self._mouse.position = point.as_tuple()
@@ -74,10 +79,7 @@ class MouseKeywords(LibraryContext):
         action = to_action(action)
 
         if location:
-            if isinstance(location, Region):
-                self._move(location.center)
-            else:
-                self._move(location)
+            self._move(location)
             # Delay is needed, otherwise move might not have "completed" before clicking
             delay(0.05)
 
